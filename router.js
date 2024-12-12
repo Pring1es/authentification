@@ -21,5 +21,7 @@ router.get("/heath", (req, res) => {
 	}
 });
 
+router.get("/allUsers", allUsers);
+
 //affichage des erreur avec status
 export default router;
