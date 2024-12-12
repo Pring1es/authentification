@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users
 
 INSERT INTO users (email, mdp, nom, prenom, numero_telephone, date_naissance)
 VALUES
-    ('fanie.boulanger@wanadoo.com', 'arbustier123', 'Boulanger', 'Fanie', '+33e623456789', '1980-01-01'), 
+    ('fanie.boulanger@wanadoo.com', 'arbustier123', 'Boulanger', 'Fanie', '+33623456789', '1980-01-01'), 
     ('vanilla.mikado@outlook.com', 'ravioliensauce456', 'Mikado', 'Vanilla', '+33687654321', '1990-02-02'), 
     ('pierre.fromage@amazon.com', 'latectonicestchanme789', 'Fromage', 'Pierre', '+33712233445', '2000-03-03');
 
