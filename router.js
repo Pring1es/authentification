@@ -20,6 +20,6 @@ router.get("/heath", (req, res) => {
 		// catch > un probleme est survenue
 	}
 });
-console.log(router);
+console.log(route);
 //affichage des erreur avec status
 export default router;
