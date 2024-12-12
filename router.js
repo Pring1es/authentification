@@ -1,5 +1,5 @@
 import express from "express";
-//importer express
+import { allUsers } from "./controller/userController.js";
 
 const router = express.Router();
 //crée un nouvel objet routeur capable de gérer les requêtes de manière modulaire et organisée

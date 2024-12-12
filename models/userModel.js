@@ -1,6 +1,6 @@
-import database from "db/database.js";
+import database from "../db/database.js";
 
-const allUsersModel = async () => {
+export const allUsersModel = async () => {
 	try {
 		// requête à la base de donnée.
 		const users = await database.query("select * from users");
@@ -11,5 +11,3 @@ const allUsersModel = async () => {
 		console.log(`il y a une erreur par ici : ${error}`);
 	}
 };
-
-export default { allUsersModel };

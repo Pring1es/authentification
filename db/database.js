@@ -1,18 +1,18 @@
-import database from "mysql2/promise";
+import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const database = mysql.createpool({
+const database = mysql.createPool({
 	host: process.env.DB_HOST,
 	port: process.env.DB_PORT,
-	name: process.env.DB_NAME,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
+	database: process.env.DB_NAME,
 });
 
 database
-	.getconnection()
+	.getConnection()
 	.then(() => {
 		console.log("Yeah! Vous êtes dans la base de données");
 	})
