@@ -13,7 +13,7 @@ const allUsersModel = async () => {
 };
 
 const userModel = {
-	// lire un utilisateur à partir de son email
+	// lire un utilisateur à partir de son email (verifier)
 	readByEmail : async (email) => {
 		try {
 			// Exécute une requête SQL pour sélectionner l'utilisateur avec l'email donné
@@ -29,8 +29,26 @@ const userModel = {
 				return false; // Retourne false si aucun utilisateur n'est trouvé
 			}
 		} catch (error) {
-			// un problème dans la requête ou la base de données ggg
+			// un problème dans la requête ou la base de données 
 			throw new Error("error!");
+		}
+	},
+	//creer un utilisateur (inscription)
+	createUser: async ({
+		email, mdp, nom, prenom, numero_telephone, date_naissance,
+	}) => {
+		try{
+				//recuperer les données de users et ajouter des nouvelles données
+			const user = await database.query(
+				"insert into users (email, mdp, nom, prenom, numero_telephone, date_naissance) values (?,?,?,?,?,?)",
+				[email, mdp, nom, prenom, numero_telephone, date_naissance]
+			);
+			//La méthode AffectedRows() renvoie le nombre de lignes affectées par la dernière instruction SQL
+			if (user.affectedRows) {
+				return user;
+			}
+		} catch (error) {
+			throw new Error(error.message);
 		}
 	},
 };
