@@ -29,7 +29,7 @@ const userModel = {
 				return false; // Retourne false si aucun utilisateur n'est trouvé
 			}
 		} catch (error) {
-			// un problème dans la requête ou la base de données
+			// un problème dans la requête ou la base de données ggg
 			throw new Error("error!");
 		}
 	},
