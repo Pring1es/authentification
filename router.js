@@ -1,5 +1,6 @@
 import express from "express";
 import { userController } from "./controller/userController.js";
+import { hashed_mdp } from "./middleware/hashedPassword.js";
 
 const router = express.Router();
 //crée un nouvel objet routeur capable de gérer les requêtes de manière modulaire et organisée
@@ -27,7 +28,7 @@ router.get("/users", userController.allUsers);
 // permettre à un utilisateur de créer son compte qui va s'enregistrer dans la base de données
 router.post("/signin", userController.createUser);
 
-router.post("/login", userController.logIn);
+router.post("/login", hashed_mdp, userController.logIn);
 
-//affichage des erreur avec status
+//affichage des erreurs avec status
 export default router;

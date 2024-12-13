@@ -3,7 +3,6 @@ import argon2 from "argon2";
 
 //exporter les données users pour voir si elle est fonctionnel
 export const userController = {
-
 	allUsers: async (req, res) => {
 		try {
 			const users = await allUsersModel();
@@ -63,18 +62,35 @@ export const userController = {
 	logIn: async (req, res) => {
 		//verification de l'email et le mot de passe
 		try {
-			const { email, password } = req.boby;
+			const { email, password } = req.body;
 			//verifier si l'utilisateur utilise bien le  mail qui correspond au mot de passe
-			const [user] = await userModel.readByEmail(email);
-			
+			const user = await userModel.readByEmail(email);
+
+			//si on récupère bien l'utilisateur alors
 			if (user) {
+				// alors on vérifie que le mot de passe correspond bien à celui hashé qui a été enregistrer dans la bdd grâce à la méthode d'argon2
 				const isMatch = await argon2.verify(user.hashed_mdp, password);
-			//si oui, alors envoie le message bonjour à utilisateurs
-			return res.status(200).json({
-				status: 200,
-				message: `Welcome ${user.username}`,
-			});
-			//sinon,  envoie le message d'erreur
+				//si cela correspond bien, alors envoie le message bonjour à utilisateurs
+				if (isMatch) {
+					return res.status(200).json({
+						status: 200,
+						message: `Welcome ${user.username}`,
+					});
+					//sinon,  envoie le message d'erreur
+				} else {
+					return res.status(401).json({
+						status: 401,
+						message: "Euh... Pas sûr-e que ce soit cela.",
+					});
+				}
+			}
+			// si on ne trouve pas d'utilisateur avec cet email.
+			else {
+				return res.status(404).json({
+					status: 404,
+					message: "On a cherché, et on a pas trouvé.",
+				});
+			}
 		} catch (error) {
 			res.status(500).json({
 				status: 500,
@@ -82,6 +98,4 @@ export const userController = {
 			});
 		}
 	},
-},
-
 };
