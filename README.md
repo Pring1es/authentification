@@ -1,9 +1,9 @@
 BACK-END
 
-1. Créer les essentiels, c'est à dire l'API avec index.js, router.js, 
-2. Créer les éléments nécessaires à la connexion de la base de données : dotenv, database.js
-3. Créer base données avec les users db.sql
-    3a. ID, email, mot de passe, nom, prénom, numéro de téléphone, date de naissance
+--1. Créer les essentiels, c'est à dire l'API avec index.js, router.js,--
+--2. Créer les éléments nécessaires à la connexion de la base de données : dotenv, database.js--
+--3. Créer base données avec les users db.sql--
+    --3a. ID, email, mot de passe, nom, prénom, numéro de téléphone, date de naissance--
 
 1. Tout vérifier qu'on peut lire tout les utilisateurs créer dans la base données.
     1a. userController.js pour récupérer la requête et userModel.js pour faire la demande à la base de données de récupérer tous les users. Avec un .GET
