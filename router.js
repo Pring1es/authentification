@@ -21,7 +21,11 @@ router.get("/heath", (req, res) => {
 	}
 });
 
-router.get("/allUsers", allUsers);
+// obtenir tout les utilisateurs de la base de données
+router.get("/users", userController.allUsers);
+
+// permettre à un utilisateur de créer son compte qui va s'enregistrer dans la base de données
+router.post("/signin", userController.createUser);
 
 //affichage des erreur avec status
 export default router;
