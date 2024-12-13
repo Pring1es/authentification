@@ -14,34 +14,39 @@ const allUsersModel = async () => {
 
 const userModel = {
 	// lire un utilisateur à partir de son email (verifier)
-	readByEmail : async (email) => {
+	readByEmail: async (email) => {
 		try {
 			// Exécute une requête SQL pour sélectionner l'utilisateur avec l'email donné
 			const [user] = await database.query(
 				`select * from users where email =?`, // Requête SQL pour rechercher l'email
-				[email] //importe email
+				[email], //importe email
 			);
 
 			// Vérifie si un utilisateur a été trouvé
-			if (user.length > 0) { 
+			if (user.length > 0) {
 				return user; // Retourne l'utilisateur si trouvé
 			} else {
 				return false; // Retourne false si aucun utilisateur n'est trouvé
 			}
 		} catch (error) {
-			// un problème dans la requête ou la base de données 
+			// un problème dans la requête ou la base de données
 			throw new Error("error!");
 		}
 	},
 	//creer un utilisateur (inscription)
 	createUser: async ({
-		email, mdp, nom, prenom, numero_telephone, date_naissance,
+		email,
+		mdp,
+		nom,
+		prenom,
+		numero_telephone,
+		date_naissance,
 	}) => {
-		try{
-				//recuperer les données de users et ajouter des nouvelles données
+		try {
+			//recuperer les données de users et ajouter des nouvelles données
 			const user = await database.query(
 				"insert into users (email, mdp, nom, prenom, numero_telephone, date_naissance) values (?,?,?,?,?,?)",
-				[email, mdp, nom, prenom, numero_telephone, date_naissance]
+				[email, mdp, nom, prenom, numero_telephone, date_naissance],
 			);
 			//La méthode AffectedRows() renvoie le nombre de lignes affectées par la dernière instruction SQL
 			if (user.affectedRows) {
@@ -53,6 +58,4 @@ const userModel = {
 	},
 };
 
-
-
-export default allUsersModel, userModel;
+export { allUsersModel, userModel };
