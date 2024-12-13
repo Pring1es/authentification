@@ -27,5 +27,7 @@ router.get("/users", userController.allUsers);
 // permettre à un utilisateur de créer son compte qui va s'enregistrer dans la base de données
 router.post("/signin", userController.createUser);
 
+router.post("/login", userController.logIn);
+
 //affichage des erreur avec status
 export default router;
