@@ -18,24 +18,28 @@ export const userController = {
 		}
 	},
 
-	createUser: async (res, req) => {
+	createUser: async (req, res) => {
 		try {
 			//on récupère l'email dans le req.body
 			const { email } = req.body;
 
+			console.log(email);
+
 			//on vérifie avec notre méthode créer dans le userModel qu'elle n'existe pas déjà dans la base de donnée en prenant l'email en paramètre.
 			const userExist = await userModel.readByEmail(email);
 			// si le user n'est pas false c'àd qu'il retourne un utilisateur le compte ne peut être créé
-			if (userExist !== false) {
-				res.status(200).json({
-					status: 200,
+			console.log(userExist);
+			if (userExist) {
+				res.status(401).json({
+					status: 401,
 					message: "J'ai bien peur que vous y soyez déjà.",
 				});
 			} else {
 				// sinon alors on met les données du req.body en paramètre de notre méthode creteUser créé dans notre userModel pour que la requête à la bdd d'insérer un nouvelle utilisateur se fasse.
-				const newUser = userModel.createdUser(req.body);
-
-				if (newUser === true) {
+				console.log(req.body);
+				const newUser = await userModel.createUser(req.body);
+				console.log("newUser >>", newUser);
+				if (newUser) {
 					res.status(200).json({
 						status: 200,
 						message: "Hey, hey, bienvenue chez nous!",

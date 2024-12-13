@@ -18,7 +18,7 @@ const userModel = {
 		try {
 			// Exécute une requête SQL pour sélectionner l'utilisateur avec l'email donné
 			const [user] = await database.query(
-				`select * from users where email =?`, // Requête SQL pour rechercher l'email
+				"select * from users where email =?", // Requête SQL pour rechercher l'email
 				[email], //importe email
 			);
 
@@ -44,16 +44,20 @@ const userModel = {
 	}) => {
 		try {
 			//recuperer les données de users et ajouter des nouvelles données
-			const user = await database.query(
+			const [user] = await database.query(
 				"insert into users (email, mdp, nom, prenom, numero_telephone, date_naissance) values (?,?,?,?,?,?)",
 				[email, mdp, nom, prenom, numero_telephone, date_naissance],
 			);
+
 			//La méthode AffectedRows() renvoie le nombre de lignes affectées par la dernière instruction SQL
 			if (user.affectedRows) {
 				return user;
+			} else {
+				return false;
 			}
 		} catch (error) {
-			throw new Error(error.message);
+			// un problème dans la requête ou la base de données
+			throw new Error("error!");
 		}
 	},
 };
