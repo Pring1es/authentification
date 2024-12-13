@@ -36,7 +36,7 @@ const userModel = {
 	//creer un utilisateur (inscription)
 	createUser: async ({
 		email,
-		mdp,
+		hashed_mdp,
 		nom,
 		prenom,
 		numero_telephone,
@@ -45,8 +45,8 @@ const userModel = {
 		try {
 			//recuperer les données de users et ajouter des nouvelles données
 			const [user] = await database.query(
-				"insert into users (email, mdp, nom, prenom, numero_telephone, date_naissance) values (?,?,?,?,?,?)",
-				[email, mdp, nom, prenom, numero_telephone, date_naissance],
+				"insert into users (email, hashed_mdp, nom, prenom, numero_telephone, date_naissance) values (?,?,?,?,?,?)",
+				[email, hashed_mdp, nom, prenom, numero_telephone, date_naissance],
 			);
 
 			//La méthode AffectedRows() renvoie le nombre de lignes affectées par la dernière instruction SQL
